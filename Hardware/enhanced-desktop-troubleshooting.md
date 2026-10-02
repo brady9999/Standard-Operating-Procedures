@@ -14,7 +14,7 @@
 | **VRM** | Voltage Regulator Module | Regulates power delivered to the CPU on the motherboard |
 | **POST Card** | POST Diagnostic Card | A card that displays POST codes to help identify where boot fails |
 | **Multimeter** | Multimeter | A device for measuring voltage, current, and resistance |
-| **Capacitor** | Capacitor | An electronic component that stores charge — can fail and bulge |
+| **Capacitor** | Capacitor | An electronic component that stores charge - can fail and bulge |
 | **Thermal Compound** | Thermal Paste | Heat-conducting material between CPU and heatsink |
 | **Load Line Calibration** | LLC | A BIOS setting affecting CPU voltage stability under load |
 | **XMP/EXPO** | Extreme Memory Profile / Extended Profiles for Overclocking | BIOS settings to run RAM at rated speeds |
@@ -28,7 +28,7 @@
 ---
 
 ## Overview
-Enhanced desktop troubleshooting involves deep hardware diagnosis — component-level testing, voltage measurement, POST code reading, and advanced Windows diagnostics. This level is used when basic troubleshooting has failed to identify or resolve the issue.
+Enhanced desktop troubleshooting involves deep hardware diagnosis - component-level testing, voltage measurement, POST code reading, and advanced Windows diagnostics. This level is used when basic troubleshooting has failed to identify or resolve the issue.
 
 ---
 
@@ -50,7 +50,7 @@ A POST code display card plugs into a PCIe or PCI slot and shows a two-digit hex
 | 70-7F | DXE post dispatch |
 | 90-9F | Boot Device Selection |
 | A0-AF | Pre-OS boot |
-| **00 / FF** | System hang — no code — usually CPU or motherboard |
+| **00 / FF** | System hang - no code - usually CPU or motherboard |
 
 ### Common Problematic Codes
 
@@ -60,8 +60,8 @@ A POST code display card plugs into a PCIe or PCI slot and shows a two-digit hex
 | 0d | No CPU or bad power |
 | 15 | Pre-memory initialization failing |
 | 55 | Memory not detected |
-| d6 | No console output device — GPU issue |
-| 99 | Super I/O initialization — usually benign |
+| d6 | No console output device - GPU issue |
+| 99 | Super I/O initialization - usually benign |
 
 ---
 
@@ -72,14 +72,14 @@ With PSU running (paperclip test or connected to system):
 
 ```
 24-pin ATX Connector:
-Pin 1  (Orange)  = +3.3V  → Should read 3.135V to 3.465V
-Pin 4  (Red)     = +5V    → Should read 4.75V to 5.25V
-Pin 9  (Purple)  = +5VSB  → Should read 4.75V to 5.25V
-Pin 10 (Yellow)  = +12V   → Should read 11.4V to 12.6V
-Pin 11 (Orange)  = +3.3V  → Should read 3.135V to 3.465V
+Pin 1  (Orange)  = +3.3V  -> Should read 3.135V to 3.465V
+Pin 4  (Red)     = +5V    -> Should read 4.75V to 5.25V
+Pin 9  (Purple)  = +5VSB  -> Should read 4.75V to 5.25V
+Pin 10 (Yellow)  = +12V   -> Should read 11.4V to 12.6V
+Pin 11 (Orange)  = +3.3V  -> Should read 3.135V to 3.465V
 
 8-pin CPU Connector:
-All Yellow = +12V  → Should read 11.4V to 12.6V
+All Yellow = +12V  -> Should read 11.4V to 12.6V
 ```
 
 ### PSU Load Testing
@@ -111,16 +111,16 @@ Get-WinEvent -FilterHashtable @{LogName='System'; Id=4101} |
 
 ### GPU Stress Testing
 1. Run FurMark for GPU stress testing
-2. Monitor GPU temperature — should stay below 90°C
+2. Monitor GPU temperature - should stay below 90°C
 3. Watch for:
-   - Screen artifacts (visual glitches) — VRAM issue
-   - Driver crash (TDR) — driver or GPU hardware issue
-   - System crash — PSU or GPU hardware issue
+   - Screen artifacts (visual glitches) - VRAM issue
+   - Driver crash (TDR) - driver or GPU hardware issue
+   - System crash - PSU or GPU hardware issue
 
 ### GPU Seating and Power
 ```
 Physical checks:
-1. Reseat GPU in PCIe slot — press until it clicks
+1. Reseat GPU in PCIe slot - press until it clicks
 2. Verify all PCIe power connectors are firmly attached (6-pin, 8-pin, 12-pin)
 3. Check GPU is in the primary PCIe slot (usually the top x16 slot)
 4. Try GPU in a different PCIe slot if available
@@ -138,28 +138,28 @@ Get-WmiObject Win32_PhysicalMemory |
 
 # Check if XMP/EXPO is enabled (RAM running at rated speed)
 Get-WmiObject Win32_PhysicalMemory | Select-Object Speed
-# Compare to sticker speed on RAM — if lower, XMP not enabled in BIOS
+# Compare to sticker speed on RAM - if lower, XMP not enabled in BIOS
 
 # Memory performance test
 winsat mem
 ```
 
 ### MemTest86 Interpretation
-- **Pass 0:** Basic tests — should complete quickly
-- **Passes 1-7:** Thorough tests — minimum 2 full passes recommended
+- **Pass 0:** Basic tests - should complete quickly
+- **Passes 1-7:** Thorough tests - minimum 2 full passes recommended
 - **Any error:** Even 1 error = RAM is faulty
 - **Errors only in certain slots:** Could be bad slot on motherboard
 - **Errors in all configs:** RAM sticks are faulty
 
 ### Dual Channel Testing
 ```
-Proper dual channel slot placement (varies by board — check manual):
+Proper dual channel slot placement (varies by board - check manual):
 Most Intel boards: A2 + B2 (slots 2 and 4)
 Most AMD boards: A2 + B2 (slots 2 and 4)
 
 If system is unstable with 2 sticks but stable with 1:
-→ Try different slot combinations
-→ Check motherboard QVL (Qualified Vendor List) for RAM compatibility
+-> Try different slot combinations
+-> Check motherboard QVL (Qualified Vendor List) for RAM compatibility
 ```
 
 ---
@@ -191,7 +191,7 @@ Get-StoragePool -FriendlyName "PoolName" | Get-PhysicalDisk |
 
 ### Recovering Data from Failing Drive
 ```powershell
-# If drive is still readable — copy data immediately
+# If drive is still readable - copy data immediately
 robocopy C:\Users\Username\Documents D:\Backup\Documents /E /LOG:"C:\copy-log.txt" /R:3 /W:5
 
 # Check and skip bad sectors during copy
@@ -203,18 +203,18 @@ robocopy C:\Source D:\Dest /E /R:0 /W:0
 ## 6. Motherboard Diagnostics
 
 ### CMOS Reset
-Resets BIOS to factory defaults — fixes many boot and instability issues:
+Resets BIOS to factory defaults - fixes many boot and instability issues:
 
-**Method 1 — BIOS menu:**
-Settings → Load Defaults → Save and Exit
+**Method 1 - BIOS menu:**
+Settings -> Load Defaults -> Save and Exit
 
-**Method 2 — CMOS jumper:**
+**Method 2 - CMOS jumper:**
 1. Power off and unplug
 2. Locate the CMOS jumper (usually labeled CLR_CMOS or JBAT)
 3. Move jumper from pins 1-2 to pins 2-3 for 10 seconds
 4. Return jumper to original position
 
-**Method 3 — Remove CMOS battery:**
+**Method 3 - Remove CMOS battery:**
 1. Power off and unplug
 2. Locate the coin cell battery on the motherboard
 3. Remove for 60 seconds
@@ -244,15 +244,15 @@ If this boots, add components back one at a time to identify what causes the fai
 ## 7. Advanced Windows Diagnostics
 
 ```powershell
-# Reliability Monitor — shows timeline of crashes and errors
-# Open via: Control Panel → Security and Maintenance → View reliability history
+# Reliability Monitor - shows timeline of crashes and errors
+# Open via: Control Panel -> Security and Maintenance -> View reliability history
 # Or run:
 Start-Process "C:\Windows\system32\mmc.exe" "/a perfmon.msc /s"
 
-# Performance Monitor — real-time performance data
+# Performance Monitor - real-time performance data
 perfmon.exe
 
-# Resource Monitor — detailed CPU, RAM, disk, network usage
+# Resource Monitor - detailed CPU, RAM, disk, network usage
 resmon.exe
 
 # Generate complete system diagnostic report
@@ -307,7 +307,7 @@ DISM /Image:C:\ /Cleanup-Image /RestoreHealth /Source:D:\Sources\install.wim
 manage-bde -unlock C: -RecoveryPassword YOUR-RECOVERY-KEY
 
 # Reset Windows without losing files (from Settings)
-# Settings → System → Recovery → Reset this PC → Keep my files
+# Settings -> System -> Recovery -> Reset this PC -> Keep my files
 ```
 
 ---
@@ -317,16 +317,16 @@ manage-bde -unlock C: -RecoveryPassword YOUR-RECOVERY-KEY
 When a system has unknown issues, run these tests in order:
 
 ```
-1. Visual inspection — capacitors, connectors, damage
-2. CMOS reset — eliminate BIOS corruption
-3. Minimum hardware test — motherboard, CPU, 1 RAM, PSU, GPU
-4. PSU voltage test — verify all rails under load
-5. MemTest86 — minimum 2 full passes
-6. CrystalDiskInfo — check SMART for all drives
-7. chkdsk — check file system integrity
-8. GPU stress test (FurMark) — 15-30 minutes
-9. CPU stress test (Prime95) — 30-60 minutes
-10. Windows diagnostics — Event Viewer, SFC, DISM
+1. Visual inspection - capacitors, connectors, damage
+2. CMOS reset - eliminate BIOS corruption
+3. Minimum hardware test - motherboard, CPU, 1 RAM, PSU, GPU
+4. PSU voltage test - verify all rails under load
+5. MemTest86 - minimum 2 full passes
+6. CrystalDiskInfo - check SMART for all drives
+7. chkdsk - check file system integrity
+8. GPU stress test (FurMark) - 15-30 minutes
+9. CPU stress test (Prime95) - 30-60 minutes
+10. Windows diagnostics - Event Viewer, SFC, DISM
 ```
 
 ---
@@ -335,21 +335,21 @@ When a system has unknown issues, run these tests in order:
 
 | Problem | Advanced Diagnostic | Likely Cause | Fix |
 |---------|--------------------|--------------|----|
-| POST hangs — no beep | POST code card | CPU or RAM | Reseat CPU, test RAM individually |
+| POST hangs - no beep | POST code card | CPU or RAM | Reseat CPU, test RAM individually |
 | BSoD WHEA error | Check voltages | CPU or RAM hardware | Replace faulty component |
 | GPU artifacts | FurMark test | VRAM failure | Replace GPU |
 | PSU trips under load | Multimeter under load | PSU failing | Replace PSU |
-| System unstable — RAM speed | Check XMP in BIOS | XMP disabled | Enable XMP/EXPO |
+| System unstable - RAM speed | Check XMP in BIOS | XMP disabled | Enable XMP/EXPO |
 | Drive shows SMART errors | CrystalDiskInfo | Drive failing | Backup immediately, replace drive |
 
 ---
 
 ## Notes
-- Systematic isolation is the key to advanced troubleshooting — change one thing at a time
+- Systematic isolation is the key to advanced troubleshooting - change one thing at a time
 - A working spare of each component is invaluable for swap testing
-- Hardware failures often develop gradually — a system that "mostly works" is still failing
-- Never ignore SMART errors on storage drives — backup immediately
-- Post codes and beep codes are BIOS-specific — look up your motherboard's manual
+- Hardware failures often develop gradually - a system that "mostly works" is still failing
+- Never ignore SMART errors on storage drives - backup immediately
+- Post codes and beep codes are BIOS-specific - look up your motherboard's manual
 
 ---
 

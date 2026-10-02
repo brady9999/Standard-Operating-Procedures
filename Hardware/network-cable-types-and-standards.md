@@ -25,23 +25,23 @@
 | **RJ45** | Registered Jack 45 | The standard 8-pin connector for ethernet cables |
 | **RJ11** | Registered Jack 11 | The smaller 4-pin connector used for telephone cables |
 | **MDI** | Medium Dependent Interface | A straight-through port (on switches/APs) |
-| **MDIX** | Medium Dependent Interface Crossover | A crossover port (on older devices — now mostly auto-sensing) |
+| **MDIX** | Medium Dependent Interface Crossover | A crossover port (on older devices - now mostly auto-sensing) |
 | **568A** | T568A | One of two standard wiring patterns for RJ45 connectors |
 | **568B** | T568B | The more common wiring pattern for RJ45 connectors in North America |
 | **PoE** | Power over Ethernet | Delivering power through ethernet cable |
 | **SMF** | Single-Mode Fiber | Fiber optic cable for long distances |
 | **MMF** | Multi-Mode Fiber | Fiber optic cable for shorter distances |
 | **SFP** | Small Form-factor Pluggable | A transceiver module for fiber or copper connections on switches |
-| **LC** | Lucent Connector | A small fiber optic connector — most common in enterprise |
-| **SC** | Subscriber Connector | A larger fiber optic connector — older enterprise environments |
-| **ST** | Straight Tip | A bayonet-style fiber connector — mostly legacy |
+| **LC** | Lucent Connector | A small fiber optic connector - most common in enterprise |
+| **SC** | Subscriber Connector | A larger fiber optic connector - older enterprise environments |
+| **ST** | Straight Tip | A bayonet-style fiber connector - mostly legacy |
 
 ---
 
 ## Overview
 Choosing the right cable is critical for network performance and reliability. Using the wrong category, exceeding distance limits, or poor termination can cause intermittent failures that are extremely difficult to diagnose.
 
-**Key principle:** Always install a cable category higher than your current needs — replacing cable inside walls is expensive.
+**Key principle:** Always install a cable category higher than your current needs - replacing cable inside walls is expensive.
 
 ---
 
@@ -52,7 +52,7 @@ Choosing the right cable is critical for network performance and reliability. Us
 | Category | Max Speed | Max Bandwidth | Max Distance | Use Case |
 |----------|-----------|---------------|--------------|---------|
 | **Cat 3** | 10 Mbps | 16 MHz | 100m | Legacy telephone, 10BASE-T (obsolete) |
-| **Cat 5** | 100 Mbps | 100 MHz | 100m | Legacy — do not install (obsolete) |
+| **Cat 5** | 100 Mbps | 100 MHz | 100m | Legacy - do not install (obsolete) |
 | **Cat 5e** | 1 Gbps | 100 MHz | 100m | Minimum acceptable for new installs |
 | **Cat 6** | 1 Gbps (10G up to 55m) | 250 MHz | 100m | Standard for new installations |
 | **Cat 6A** | 10 Gbps | 500 MHz | 100m | Recommended for new builds, PoE++ |
@@ -63,13 +63,13 @@ Choosing the right cable is critical for network performance and reliability. Us
 
 **Cat 5e vs Cat 6:**
 - Cat 6 has tighter twists and a plastic separator (spline) between pairs
-- Cat 6 handles 10 Gbps up to 55 meters — Cat 5e cannot do 10 Gbps
+- Cat 6 handles 10 Gbps up to 55 meters - Cat 5e cannot do 10 Gbps
 - Cat 6 has better crosstalk resistance
 - Cat 6 is the minimum recommended for any new installation today
 
 **Cat 6 vs Cat 6A:**
-- Cat 6A is larger in diameter — requires larger conduit
-- Cat 6A supports full 10 Gbps at 100 meters — Cat 6 only supports it to 55m
+- Cat 6A is larger in diameter - requires larger conduit
+- Cat 6A supports full 10 Gbps at 100 meters - Cat 6 only supports it to 55m
 - Cat 6A is required for PoE++ (Type 4, up to 100W)
 - Cat 6A is recommended for any installation that may need 10G in the future
 
@@ -77,32 +77,32 @@ Choosing the right cable is critical for network performance and reliability. Us
 
 ## 2. TIA-568 Wiring Standards
 
-TIA-568 defines how the 8 wires inside an ethernet cable are arranged in the RJ45 connector. There are two patterns — **T568A** and **T568B**.
+TIA-568 defines how the 8 wires inside an ethernet cable are arranged in the RJ45 connector. There are two patterns - **T568A** and **T568B**.
 
 ### T568B (Most Common in North America)
 
 ```
-Pin 1 — White/Orange  ──┐
-Pin 2 — Orange        ──┘ Pair 2
-Pin 3 — White/Green   ──┐
-Pin 4 — Blue          ──┐ Pair 1
-Pin 5 — White/Blue    ──┘
-Pin 6 — Green         ──┘ Pair 3
-Pin 7 — White/Brown   ──┐
-Pin 8 — Brown         ──┘ Pair 4
+Pin 1 - White/Orange  ──┐
+Pin 2 - Orange        ──┘ Pair 2
+Pin 3 - White/Green   ──┐
+Pin 4 - Blue          ──┐ Pair 1
+Pin 5 - White/Blue    ──┘
+Pin 6 - Green         ──┘ Pair 3
+Pin 7 - White/Brown   ──┐
+Pin 8 - Brown         ──┘ Pair 4
 ```
 
 ### T568A
 
 ```
-Pin 1 — White/Green   ──┐
-Pin 2 — Green         ──┘ Pair 3
-Pin 3 — White/Orange  ──┐
-Pin 4 — Blue          ──┐ Pair 1
-Pin 5 — White/Blue    ──┘
-Pin 6 — Orange        ──┘ Pair 2
-Pin 7 — White/Brown   ──┐
-Pin 8 — Brown         ──┘ Pair 4
+Pin 1 - White/Green   ──┐
+Pin 2 - Green         ──┘ Pair 3
+Pin 3 - White/Orange  ──┐
+Pin 4 - Blue          ──┐ Pair 1
+Pin 5 - White/Blue    ──┘
+Pin 6 - Orange        ──┘ Pair 2
+Pin 7 - White/Brown   ──┐
+Pin 8 - Brown         ──┘ Pair 4
 ```
 
 ### Straight-Through vs Crossover
@@ -113,7 +113,7 @@ Pin 8 — Brown         ──┘ Pair 4
 | **Crossover** | 568A | 568B | Switch to switch (old), PC to PC (old) |
 | **Rollover/Console** | 568B | Reversed | Console cable for Cisco devices |
 
-> **Note:** Modern network equipment uses **Auto-MDIX** — it automatically detects and corrects straight-through vs crossover. Crossover cables are rarely needed today.
+> **Note:** Modern network equipment uses **Auto-MDIX** - it automatically detects and corrects straight-through vs crossover. Crossover cables are rarely needed today.
 
 ### The Memory Trick for 568B
 ```
@@ -126,10 +126,10 @@ White/Orange, Orange, White/Green, Blue, White/Blue, Green, White/Brown, Brown
 ## 3. Cable Testing and Verification
 
 ### What a Cable Tester Checks
-- **Continuity** — all 8 wires connected end to end
-- **Wire map** — correct pin-to-pin connections (no crossed or reversed pairs)
-- **Short** — wires touching each other
-- **Split pair** — wires from different pairs terminated together (works but has terrible crosstalk)
+- **Continuity** - all 8 wires connected end to end
+- **Wire map** - correct pin-to-pin connections (no crossed or reversed pairs)
+- **Short** - wires touching each other
+- **Split pair** - wires from different pairs terminated together (works but has terrible crosstalk)
 
 ### Common Wiring Faults
 
@@ -141,7 +141,7 @@ White/Orange, Orange, White/Green, Blue, White/Blue, Green, White/Brown, Brown
 | **Crossed pair** | Pair wired to wrong position | Termination error |
 | **Split pair** | Wires from different pairs at same position | Using wrong color at wrong pin |
 
-### PowerShell — Test Network Connectivity
+### PowerShell - Test Network Connectivity
 ```powershell
 # Test basic connectivity
 Test-NetConnection -ComputerName 192.168.1.1
@@ -149,7 +149,7 @@ Test-NetConnection -ComputerName 192.168.1.1
 # Test with detailed info
 Test-NetConnection -ComputerName 192.168.1.1 -InformationLevel Detailed
 
-# Check link speed (shows negotiated speed — can indicate cable issue)
+# Check link speed (shows negotiated speed - can indicate cable issue)
 Get-NetAdapter | Select-Object Name, LinkSpeed, Status
 
 # Check for errors on adapter
@@ -167,7 +167,7 @@ Get-NetAdapterStatistics | Select-Object Name, ReceivedPackets, ReceivedErrors, 
 | **802.3bt Type 3** (PoE++) | 60W | 4 pairs | Cat 6A recommended |
 | **802.3bt Type 4** (PoE++) | 100W | 4 pairs | Cat 6A required |
 
-> Higher PoE standards generate more heat in the cable. Cat 6A is mandatory for 90W+ PoE — Cat 5e or Cat 6 will overheat in bundles.
+> Higher PoE standards generate more heat in the cable. Cat 6A is mandatory for 90W+ PoE - Cat 5e or Cat 6 will overheat in bundles.
 
 ---
 
@@ -196,7 +196,7 @@ Get-NetAdapterStatistics | Select-Object Name, ReceivedPackets, ReceivedErrors, 
 
 | Connector | Description | Common Use |
 |-----------|-------------|-----------|
-| **LC** | Small form factor, push-pull latch | Enterprise switches, SFPs — most common |
+| **LC** | Small form factor, push-pull latch | Enterprise switches, SFPs - most common |
 | **SC** | Square body, push-pull | Older enterprise, patch panels |
 | **ST** | Round, bayonet twist-lock | Legacy installations |
 | **MPO/MTP** | Multi-fiber connector (12 or 24 fibers) | High-density data centers |
@@ -260,13 +260,13 @@ SMF at 1 Gbps: up to 100km with appropriate transceiver
 ### Installation Don'ts
 ```
 ❌ Never exceed 100m total run length
-❌ Never staple cables — use proper cable clips
+❌ Never staple cables - use proper cable clips
 ❌ Never kink or sharply bend cables
 ❌ Never run ethernet parallel to high-voltage electrical for long distances
 ❌ Never untwist more than 13mm (0.5 inch) when terminating
 ❌ Never mix 568A and 568B on the same cable
 ❌ Never use Cat 5 for new installations
-❌ Never use electrical tape to splice a damaged cable — replace it
+❌ Never use electrical tape to splice a damaged cable - replace it
 ```
 
 ---
@@ -276,15 +276,15 @@ SMF at 1 Gbps: up to 100km with appropriate transceiver
 ```
 ✅ Keep fiber bend radius above minimum (typically 10x cable diameter)
 ✅ Use appropriate strain relief at all termination points
-✅ Clean fiber connectors before mating — use proper fiber cleaning tools
+✅ Clean fiber connectors before mating - use proper fiber cleaning tools
 ✅ Always cap unused fiber ports with dust caps
-✅ Label fiber runs clearly — indicate SMF vs MMF and connector types
+✅ Label fiber runs clearly - indicate SMF vs MMF and connector types
 ✅ Test with an OTDR after installation for long runs
 ✅ Use proper fiber enclosures in patch panels
 
-❌ Never exceed minimum bend radius — fiber will crack or increase loss
-❌ Never look directly into a fiber — laser light can cause eye damage
-❌ Never touch the fiber end-face — oils from fingers degrade signal
+❌ Never exceed minimum bend radius - fiber will crack or increase loss
+❌ Never look directly into a fiber - laser light can cause eye damage
+❌ Never touch the fiber end-face - oils from fingers degrade signal
 ❌ Never run fiber and copper in the same conduit if possible
 ```
 
@@ -308,7 +308,7 @@ SMF at 1 Gbps: up to 100km with appropriate transceiver
 | Tool | What It Does |
 |------|-------------|
 | **Cable tester** (basic) | Verifies continuity and wire map |
-| **Cable certifier** (advanced) | Verifies category compliance — tests attenuation, crosstalk, return loss |
+| **Cable certifier** (advanced) | Verifies category compliance - tests attenuation, crosstalk, return loss |
 | **TDR** (Time Domain Reflectometer) | Locates faults and measures cable length |
 | **OTDR** (Optical TDR) | Tests fiber optic runs for faults and loss |
 | **Visual fault locator** | Shines visible light through fiber to find breaks |
@@ -332,31 +332,31 @@ SMF at 1 Gbps: up to 100km with appropriate transceiver
 
 ### Cable Category Quick Pick
 ```
-Desktop/phone runs        → Cat 6
-High-density areas        → Cat 6A
-PoE++ devices (60W+)      → Cat 6A
-Short fiber (building)    → OM3 or OM4 MMF
-Long fiber (campus/WAN)   → SMF
-Data center spine         → OM4 or SMF
+Desktop/phone runs        -> Cat 6
+High-density areas        -> Cat 6A
+PoE++ devices (60W+)      -> Cat 6A
+Short fiber (building)    -> OM3 or OM4 MMF
+Long fiber (campus/WAN)   -> SMF
+Data center spine         -> OM4 or SMF
 ```
 
 ### Maximum Distances
 ```
-Cat 5e/6/6A copper   → 100m total (90m permanent run)
-OM3 at 10G           → 300m
-OM4 at 10G           → 400m
-SMF at 10G           → 10km
+Cat 5e/6/6A copper   -> 100m total (90m permanent run)
+OM3 at 10G           -> 300m
+OM4 at 10G           -> 400m
+SMF at 10G           -> 10km
 ```
 
 ---
 
 ## Notes
-- TIA-568B is the standard in North America — use it consistently throughout your installation
-- Never mix 568A and 568B on the same cable — this creates a crossover cable
+- TIA-568B is the standard in North America - use it consistently throughout your installation
+- Never mix 568A and 568B on the same cable - this creates a crossover cable
 - Exceeding the 100m limit is one of the most common and hardest to diagnose network problems
-- Always test cables after installation — visual inspection is not sufficient
-- OM3 and OM4 look the same (aqua) — label them clearly
-- Fiber connectors must be clean — a dirty connector can cause more signal loss than a long cable run
+- Always test cables after installation - visual inspection is not sufficient
+- OM3 and OM4 look the same (aqua) - label them clearly
+- Fiber connectors must be clean - a dirty connector can cause more signal loss than a long cable run
 
 ---
 

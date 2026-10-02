@@ -1,5 +1,5 @@
 # Enhanced Laptop Troubleshooting
-> Advanced diagnostic and repair techniques for laptops — hardware-level diagnosis, component testing, and deeper software troubleshooting.
+> Advanced diagnostic and repair techniques for laptops - hardware-level diagnosis, component testing, and deeper software troubleshooting.
 
 **Category:** Hardware  
 **Last Updated:** 2026-08-18  
@@ -14,10 +14,10 @@
 | **Minidump** | Memory Dump | A file created during a BSoD containing diagnostic information |
 | **SMART** | Self-Monitoring, Analysis and Reporting Technology | A drive's built-in health monitoring system |
 | **Beep Code** | POST Beep Code | A series of beeps during POST indicating a specific hardware failure |
-| **DIMM** | Dual Inline Memory Module | A RAM stick — laptops use SO-DIMM (smaller form factor) |
+| **DIMM** | Dual Inline Memory Module | A RAM stick - laptops use SO-DIMM (smaller form factor) |
 | **SO-DIMM** | Small Outline DIMM | The smaller RAM module format used in laptops |
 | **NVMe** | Non-Volatile Memory Express | A fast SSD interface using PCIe |
-| **M.2** | M.2 | A form factor for SSDs — can be SATA or NVMe |
+| **M.2** | M.2 | A form factor for SSDs - can be SATA or NVMe |
 | **Reflow** | GPU Reflow | Heating the GPU solder joints to fix cold solder connections |
 | **ESD** | Electrostatic Discharge | Static electricity that can permanently damage electronic components |
 | **WinPE** | Windows Preinstallation Environment | A minimal bootable Windows environment for diagnostics |
@@ -54,14 +54,14 @@ Most laptops have built-in hardware diagnostics accessible from the BIOS/UEFI or
 | Microsoft Surface | Hold Volume Up + Power |
 
 ### Running Built-in Diagnostics
-- **Dell:** F12 at boot → **Diagnostics** — runs full hardware test
-- **HP:** F2 at boot → **HP PC Hardware Diagnostics** — tests all components
-- **Lenovo:** F10 at boot → **Lenovo Diagnostics** — comprehensive hardware test
+- **Dell:** F12 at boot -> **Diagnostics** - runs full hardware test
+- **HP:** F2 at boot -> **HP PC Hardware Diagnostics** - tests all components
+- **Lenovo:** F10 at boot -> **Lenovo Diagnostics** - comprehensive hardware test
 
 ```powershell
 # Run Windows Memory Diagnostic
 MdSched.exe
-# Choose to restart and check — runs on next boot
+# Choose to restart and check - runs on next boot
 
 # Check if UEFI diagnostics are available
 Get-WmiObject -Namespace root\wmi -Class MSAcpi_ThermalZoneTemperature
@@ -85,15 +85,15 @@ Get-WinEvent -LogName "System" | Where-Object {$_.ProviderName -eq "Microsoft-Wi
 1. Download MemTest86 from memtest86.com
 2. Create bootable USB
 3. Boot from USB
-4. Let it run at least 2 full passes — errors indicate failing RAM
+4. Let it run at least 2 full passes - errors indicate failing RAM
 5. Even 1 error = RAM failure
 
 ### Isolating Bad RAM
 If the laptop has two RAM slots:
-1. Remove one stick — test
-2. If stable — the removed stick may be faulty
-3. Swap sticks — test with only the other stick
-4. If it fails with stick A but passes with stick B — stick A is bad
+1. Remove one stick - test
+2. If stable - the removed stick may be faulty
+3. Swap sticks - test with only the other stick
+4. If it fails with stick A but passes with stick B - stick A is bad
 
 ```powershell
 # View installed RAM
@@ -120,7 +120,7 @@ chkdsk C: /f /r /x
 chkdsk C: /scan
 ```
 
-### CrystalDiskInfo — SMART Values to Watch
+### CrystalDiskInfo - SMART Values to Watch
 
 | Attribute | Warning Sign |
 |-----------|-------------|
@@ -182,18 +182,18 @@ Signs of thermal throttling:
 1. Clean vents with compressed air
 2. Ensure bottom vents are not blocked
 3. Use a cooling pad
-4. Replace thermal paste (advanced — requires disassembly)
+4. Replace thermal paste (advanced - requires disassembly)
 
 ### CPU Stress Test
 ```powershell
 # Use Prime95 or CINEBENCH for CPU stress testing
 # Monitor temperatures during the test using HWiNFO or HWMonitor
-# If temps exceed 95°C — thermal solution needs attention
+# If temps exceed 95°C - thermal solution needs attention
 ```
 
 ---
 
-## 5. Display Diagnostics — Advanced
+## 5. Display Diagnostics - Advanced
 
 ### Testing the Display Panel vs GPU
 
@@ -208,8 +208,8 @@ Get-WinEvent -LogName "System" | Where-Object {$_.ProviderName -like "*display*"
 
 ### Backlight vs Panel Test
 1. In a dark room shine a flashlight through the back of the screen at an angle
-2. If you can see the desktop image — the backlight is dead, panel is fine
-3. If you see nothing — GPU or LVDS/eDP cable issue
+2. If you can see the desktop image - the backlight is dead, panel is fine
+3. If you see nothing - GPU or LVDS/eDP cable issue
 
 ### External Monitor Test
 - Connect external monitor via HDMI or DisplayPort
@@ -246,7 +246,7 @@ Get-WmiObject Win32_Battery | Select-Object Name, Status, EstimatedChargeRemaini
 | BatteryStatus Value | Meaning |
 |--------------------|---------|
 | 1 | Discharging |
-| 2 | AC power — not charging |
+| 2 | AC power - not charging |
 | 3 | Fully charged |
 | 4 | Low |
 | 5 | Critical |
@@ -262,7 +262,7 @@ Signs of charging port failure:
 - Port is loose or wobbly
 - Burning smell near port
 
-→ Requires hardware repair — soldering or port replacement
+-> Requires hardware repair - soldering or port replacement
 
 ---
 
@@ -284,9 +284,9 @@ Get-WinEvent -FilterHashtable @{LogName='Application'; Level=1,2} |
 
 ### Using WinDbg for Minidump Analysis
 1. Install WinDbg from Microsoft Store
-2. Open WinDbg → **File** → **Open Dump File** → select `.dmp` file
+2. Open WinDbg -> **File** -> **Open Dump File** -> select `.dmp` file
 3. Type `!analyze -v` in the command window
-4. Look for **FAILURE_BUCKET_ID** and **MODULE_NAME** — identifies the failing component
+4. Look for **FAILURE_BUCKET_ID** and **MODULE_NAME** - identifies the failing component
 
 ### Common BSoD Root Causes by Code
 
@@ -295,7 +295,7 @@ Get-WinEvent -FilterHashtable @{LogName='Application'; Level=1,2} |
 | MEMORY_MANAGEMENT | Run MemTest86, check RAM seating |
 | DRIVER_IRQL_NOT_LESS_OR_EQUAL | Check recently installed drivers, rollback |
 | KERNEL_DATA_INPAGE_ERROR | Run chkdsk, check HDD/SSD health |
-| SYSTEM_SERVICE_EXCEPTION | Corrupted driver or system file — run sfc /scannow |
+| SYSTEM_SERVICE_EXCEPTION | Corrupted driver or system file - run sfc /scannow |
 | WHEA_UNCORRECTABLE_ERROR | CPU or RAM hardware failure |
 | VIDEO_TDR_FAILURE | GPU driver or GPU hardware failure |
 
@@ -333,14 +333,14 @@ Test-Connection 8.8.8.8 -Count 100 | Measure-Object ResponseTime -Average -Maxim
 
 ### Startup Repair
 1. Hold **Shift** while clicking Restart
-2. **Troubleshoot** → **Advanced Options** → **Startup Repair**
+2. **Troubleshoot** -> **Advanced Options** -> **Startup Repair**
 
 ### System Restore
-1. **Troubleshoot** → **Advanced Options** → **System Restore**
+1. **Troubleshoot** -> **Advanced Options** -> **System Restore**
 2. Select a restore point before the issue started
 
 ### Reset This PC
-1. **Troubleshoot** → **Reset This PC**
+1. **Troubleshoot** -> **Reset This PC**
 2. Choose **Keep my files** or **Remove everything**
 
 ### Command Line Recovery
@@ -384,7 +384,7 @@ chkdsk C: /f /r
 | Random BSoDs | Run MemTest86 | RAM errors | Replace RAM |
 | Slow even after reinstall | Check SMART values | Reallocated sectors | Replace drive |
 | Overheats under load | Monitor temps | Exceeds 95°C | Clean vents, replace thermal paste |
-| Won't boot — no POST | Remove RAM, test individually | Dead RAM stick | Replace faulty stick |
+| Won't boot - no POST | Remove RAM, test individually | Dead RAM stick | Replace faulty stick |
 | Display dies after 20 min | Monitor GPU temp | GPU throttling | Repaste GPU, improve airflow |
 | Intermittent charging | Check port at angles | Port damaged | Hardware repair |
 
@@ -392,8 +392,8 @@ chkdsk C: /f /r
 
 ## Notes
 - Always wear an anti-static wrist strap when handling internal components
-- Never work on a laptop that is plugged in — disconnect AC and remove battery first
-- Take photos before disassembly — you'll need them to reassemble
+- Never work on a laptop that is plugged in - disconnect AC and remove battery first
+- Take photos before disassembly - you'll need them to reassemble
 - Use iFixit guides for model-specific disassembly instructions
 - A laptop that passes all software diagnostics but still has issues likely has a hardware fault requiring depot repair
 

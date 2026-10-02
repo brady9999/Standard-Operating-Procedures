@@ -2,7 +2,7 @@
 > A guide to diagnosing and resolving common desktop computer hardware and software issues.
 
 **Category:** Hardware  
-**Last Updated:** 2026-08-18  
+**Last Updated:** 2026-09-29
 **Author:** Brady Genik
 
 ---
@@ -16,7 +16,7 @@
 | **GPU** | Graphics Processing Unit | The dedicated graphics card |
 | **CPU** | Central Processing Unit | The main processor |
 | **Beep Code** | POST Beep Code | Audible codes from the motherboard speaker indicating hardware failures |
-| **CMOS** | Complementary Metal-Oxide Semiconductor | Stores BIOS settings — reset by removing the CMOS battery |
+| **CMOS** | Complementary Metal-Oxide Semiconductor | Stores BIOS settings - reset by removing the CMOS battery |
 | **ATX** | Advanced Technology eXtended | The standard form factor for desktop motherboards and power supplies |
 | **PCIe** | Peripheral Component Interconnect Express | The slot used for GPUs, NVMe SSDs, and expansion cards |
 | **SATA** | Serial ATA | Interface for connecting HDDs, SSDs, and optical drives |
@@ -25,7 +25,6 @@
 ---
 
 ## Overview
-Desktop troubleshooting has an advantage over laptops — components are more accessible and easier to swap and test individually. The modular nature means you can isolate failures by testing one component at a time.
 
 **Basic troubleshooting order:**
 1. Check physical connections
@@ -39,13 +38,13 @@ Desktop troubleshooting has an advantage over laptops — components are more ac
 ## Troubleshooting Methodology
 
 ```
-1. IDENTIFY — What exactly is the problem?
-2. CHECK PHYSICAL — Cables seated? Components secure? Damage visible?
-3. SIMPLIFY — Remove non-essential components and test
-4. SWAP — Replace suspected component with known-good
-5. FIX — Apply solution
-6. VERIFY — Confirm resolved
-7. DOCUMENT — Record problem and fix
+1. IDENTIFY - What exactly is the problem?
+2. CHECK PHYSICAL - Cables seated? Components secure? Damage visible?
+3. SIMPLIFY - Remove non-essential components and test
+4. SWAP - Replace suspected component with known-good
+5. FIX - Apply solution
+6. VERIFY - Confirm resolved
+7. DOCUMENT - Record problem and fix
 ```
 
 ---
@@ -54,34 +53,34 @@ Desktop troubleshooting has an advantage over laptops — components are more ac
 
 ### Step by Step
 1. Check the power cable is plugged into the PSU and the wall outlet
-2. Check the PSU switch on the back is in the **ON (I)** position — not **(O)**
+2. Check the PSU switch on the back is in the **ON (I)** position - not **(O)**
 3. Try a different wall outlet or power strip
 4. Check the power button connector is attached to the motherboard header
-5. Press the power button — listen for any fans, drives, or beeps
+5. Press the power button - listen for any fans, drives, or beeps
 
 ### No Response At All
 ```
 Possible causes:
-- Dead PSU → Test with PSU tester or known-good PSU
-- Dead wall outlet → Test with another device
-- Front panel power button not connected → Check header pins
-- Blown fuse in power cable → Replace cable
+- Dead PSU -> Test with PSU tester or known-good PSU
+- Dead wall outlet -> Test with another device
+- Front panel power button not connected -> Check header pins
+- Blown fuse in power cable -> Replace cable
 ```
 
 ### Powers On But No Display
 ```
 Possible causes:
-- RAM not seated → Reseat RAM sticks
-- GPU not seated → Reseat GPU
-- Monitor not connected properly → Check cable and input source
-- CMOS issue → Clear CMOS
+- RAM not seated -> Reseat RAM sticks
+- GPU not seated -> Reseat GPU
+- Monitor not connected properly -> Check cable and input source
+- CMOS issue -> Clear CMOS
 ```
 
 ### Beep Codes During POST
 
 | Beeps | Common Meaning (BIOS dependent) |
 |-------|--------------------------------|
-| 1 short | POST successful — normal |
+| 1 short | POST successful - normal |
 | 1 long, 2 short | Video card error (AMI BIOS) |
 | 2 short | Memory error (Award BIOS) |
 | 3 long | Memory error (AMI BIOS) |
@@ -90,14 +89,14 @@ Possible causes:
 
 ---
 
-## 2. Power Supply Diagnostics
+## 2. Power Supply Diagnostics 
 
-### Paper Clip Test (PSU Only — No Motherboard)
+### Paper Clip Test (PSU Only - No Motherboard) (Last Resort)
 1. Unplug PSU from everything
 2. Find the 24-pin ATX connector
 3. Short the green wire (PS_ON) to any black wire (Ground) with a paper clip
 4. Plug PSU into wall and flip the switch
-5. If fans spin — PSU has basic functionality
+5. If fans spin - PSU has basic functionality
 6. Use a multimeter to verify voltages:
 
 | Rail | Expected Voltage | Tolerance |
@@ -112,7 +111,7 @@ Possible causes:
 # Check PSU via Windows (limited info)
 Get-WmiObject Win32_Battery  # For UPS/battery backup systems
 
-# Monitor system voltages (requires third-party tool like HWiNFO)
+# Monitor system voltages 
 # Or check motherboard utility software
 ```
 
@@ -125,7 +124,7 @@ Get-WmiObject Win32_Battery  # For UPS/battery backup systems
 2. Check video cable (HDMI, DisplayPort, DVI, VGA) is securely connected at both ends
 3. Try a different cable
 4. Try a different monitor
-5. If using dedicated GPU — try the motherboard's integrated video output
+5. If using dedicated GPU - try the motherboard's integrated video output
 6. Reseat the GPU in the PCIe slot
 
 ```powershell
@@ -143,8 +142,28 @@ pnputil /scan-devices
 
 ## 4. Performance Issues
 
-### Desktop Is Running Slow
+### Overheating Desktop
+```powershell
+# Check CPU temperatures
+Get-WmiObject MSAcpi_ThermalZoneTemperature -Namespace root/wmi |
+  ForEach-Object { [math]::Round(($_.CurrentTemperature / 10) - 273.15, 1) }
+```
 
+### Desktop Is Running Slow
+**Physical checks:**
+1. Open the case - check for excessive dust on fans and heatsinks
+2. Verify all case fans are spinning
+3. Check CPU fan is spinning and properly attached to heatsink
+4. Ensure airflow is logical - intake fans in front, exhaust fans in back/top
+5. Clean all dust filters
+
+**Logical checks:**
+1. Open Task Manager 
+2. Processes Tab - read what applications have the most RAM and CPU usage
+3. Right click un-needed application, click end task
+4. Click Performance and check if usage on RAM and CPU went down
+
+### When Task Manager Is Blocked
 ```powershell
 # Check what's consuming resources
 Get-Process | Sort-Object CPU -Descending | Select-Object -First 15 Name, CPU, WorkingSet
@@ -167,19 +186,6 @@ Get-CimInstance Win32_StartupCommand | Select-Object Name, Command
 # Or via PowerShell (disable from registry)
 ```
 
-### Overheating Desktop
-```powershell
-# Check CPU temperatures
-Get-WmiObject MSAcpi_ThermalZoneTemperature -Namespace root/wmi |
-  ForEach-Object { [math]::Round(($_.CurrentTemperature / 10) - 273.15, 1) }
-```
-
-**Physical checks:**
-1. Open the case — check for excessive dust on fans and heatsinks
-2. Verify all case fans are spinning
-3. Check CPU fan is spinning and properly attached to heatsink
-4. Ensure airflow is logical — intake fans in front, exhaust fans in back/top
-5. Clean all dust filters
 
 ---
 
@@ -221,9 +227,9 @@ MdSched.exe
 **Physical RAM troubleshooting:**
 1. Power off and unplug
 2. Remove all RAM sticks
-3. Install one stick in slot 1 (usually A2 — check motherboard manual)
-4. Power on — if it boots, RAM and slot are good
-5. Add second stick — if it crashes, second stick or second slot is faulty
+3. Install one stick in slot 1 (check motherboard manual)
+4. Power on - if it boots, RAM and slot are good
+5. Add second stick - if it crashes, second stick or second slot is faulty
 6. Rotate sticks and slots to isolate the bad component
 
 ---
@@ -287,7 +293,7 @@ Get-PnpDevice | Where-Object {$_.Class -eq "USB"} | Select-Object FriendlyName, 
 Get-PnpDevice | Where-Object {$_.Class -eq "USB" -and $_.Status -ne "OK"} | Select-Object FriendlyName, Status, Problem
 
 # Reset USB controller (via Device Manager)
-# Uninstall USB Root Hubs → Scan for hardware changes
+# Uninstall USB Root Hubs -> Scan for hardware changes
 ```
 
 **Physical checks:**
@@ -301,10 +307,10 @@ Get-PnpDevice | Where-Object {$_.Class -eq "USB" -and $_.Status -ne "OK"} | Sele
 ## 10. System Repair Commands
 
 ```powershell
-# System File Checker — repairs corrupted Windows system files
+# System File Checker - repairs corrupted Windows system files
 sfc /scannow
 
-# DISM — repairs Windows image
+# DISM - repairs Windows image
 DISM /Online /Cleanup-Image /CheckHealth
 DISM /Online /Cleanup-Image /ScanHealth
 DISM /Online /Cleanup-Image /RestoreHealth
@@ -341,20 +347,15 @@ msinfo32 /report "C:\systeminfo.txt"
 | Audio gone | Service running | `Restart-Service AudioSrv` |
 | BSoD | Error code, Event Viewer | `sfc /scannow` |
 | Disk errors | SMART status | `chkdsk C: /f /r` |
-| USB not working | Different port, cable | Device Manager — rescan |
+| USB not working | Different port, cable | Device Manager - rescan |
 
 ---
 
 ## Notes
 - Always power off and unplug before touching internal components
-- Ground yourself before touching components — ESD can kill hardware silently
-- Desktop troubleshooting is much easier than laptop — components are accessible and swappable
-- A POST code display card is invaluable — shows exactly where POST is failing
-- When in doubt — remove everything and add components back one at a time
+- Ground yourself before touching components - ESD can kill hardware silently
+- Desktop troubleshooting is much easier than laptop - components are accessible and swappable
+- A POST code display card is invaluable - shows exactly where POST is failing
+- When in doubt - remove everything and add components back one at a time
 
 ---
-
-## Related Documents
-- [Enhanced Desktop Troubleshooting](enhanced-desktop-troubleshooting.md)
-- [Basic Laptop Troubleshooting](basic-laptop-troubleshooting.md)
-- [Windows Event Viewer](../Windows/windows-event-viewer.md)

@@ -19,28 +19,28 @@
 | **HDD/SSD** | Hard Disk Drive / Solid State Drive | Long-term storage for the OS and files |
 | **Thermal Paste** | Thermal Interface Material | A compound between the CPU and heatsink to transfer heat |
 | **BSoD** | Blue Screen of Death | A Windows critical error that causes a system crash |
-| **Hibernation** | Hibernate | Saves RAM to disk and powers off — faster than full shutdown |
+| **Hibernation** | Hibernate | Saves RAM to disk and powers off - faster than full shutdown |
 | **AC Adapter** | AC Adapter | The external power supply (charger) for a laptop |
 
 ---
 
 ## Overview
-Laptop troubleshooting follows a logical process — start with the simplest possible cause and work toward the more complex. Most issues fall into a few common categories: power, display, connectivity, performance, and software.
+Laptop troubleshooting follows a logical process - start with the simplest possible cause and work toward the more complex. Most issues fall into a few common categories: power, display, connectivity, performance, and software.
 
-**Golden Rule:** Before doing anything else — restart the laptop. This resolves a surprising number of issues.
+**Golden Rule:** Before doing anything else - restart the laptop. This resolves a surprising number of issues.
 
 ---
 
 ## Troubleshooting Methodology
 
 ```
-1. IDENTIFY — What exactly is the problem? Get specific symptoms.
-2. REPRODUCE — Can you make the problem happen again?
-3. ISOLATE — Is it hardware or software? Is it one app or everything?
-4. RESEARCH — Search the error message or symptoms.
-5. FIX — Apply the solution.
-6. VERIFY — Confirm the problem is resolved.
-7. DOCUMENT — Record what the problem was and how it was fixed.
+1. IDENTIFY - What exactly is the problem? Get specific symptoms.
+2. REPRODUCE - Can you make the problem happen again?
+3. ISOLATE - Is it hardware or software? Is it one app or everything?
+4. RESEARCH - Search the error message or symptoms.
+5. FIX - Apply the solution.
+6. VERIFY - Confirm the problem is resolved.
+7. DOCUMENT - Record what the problem was and how it was fixed.
 ```
 
 ---
@@ -50,14 +50,14 @@ Laptop troubleshooting follows a logical process — start with the simplest pos
 ### Step by Step
 1. Check the power adapter is plugged into both the laptop and the wall outlet
 2. Try a different wall outlet
-3. Check the power adapter LED — is it lit? If not the adapter may be faulty
+3. Check the power adapter LED - is it lit? If not the adapter may be faulty
 4. Remove the battery (if removable), hold the power button for 30 seconds, reinsert battery and try again
-5. Try powering on with only AC adapter — no battery
+5. Try powering on with only AC adapter - no battery
 6. Listen and watch for any signs of life:
    - Fan spinning?
    - LEDs flickering?
    - Screen briefly lit?
-7. If nothing — suspect power adapter, battery, or motherboard failure
+7. If nothing - suspect power adapter, battery, or motherboard failure
 
 ### Common Causes and Fixes
 
@@ -74,23 +74,23 @@ Laptop troubleshooting follows a logical process — start with the simplest pos
 
 ### Screen Is Black / No Display
 
-1. Check if the laptop is actually on — listen for fan, look for keyboard backlighting
+1. Check if the laptop is actually on - listen for fan, look for keyboard backlighting
 2. Press **Fn + F7** (or the display toggle key on your model) to cycle through display modes
-3. Connect an external monitor — if external works, the issue is the laptop screen or cable
-4. Shine a flashlight at the screen at an angle — if you can see a faint image the backlight has failed
+3. Connect an external monitor - if external works, the issue is the laptop screen or cable
+4. Shine a flashlight at the screen at an angle - if you can see a faint image the backlight has failed
 5. Try pressing **Windows + P** to change display mode
 
 ### Screen Flickering
 - Update or roll back the display driver
 - Check display cable connection (may require disassembly)
-- Test refresh rate: **Display Settings → Advanced Display → Refresh Rate**
+- Test refresh rate: **Display Settings -> Advanced Display -> Refresh Rate**
 
 ### Dead Pixels
 - Run a dead pixel test (solid color full screen)
-- Isolated dead pixels — cosmetic issue only
-- Large areas of dead pixels — screen replacement required
+- Isolated dead pixels - cosmetic issue only
+- Large areas of dead pixels - screen replacement required
 
-### PowerShell — Display Diagnostics
+### PowerShell - Display Diagnostics
 ```powershell
 # View display adapter info
 Get-WmiObject Win32_VideoController | Select-Object Name, DriverVersion, Status
@@ -120,7 +120,7 @@ powercfg /batteryreport /output "C:\battery-report.html"
 
 ### Battery Drains Quickly
 1. Check what's consuming power:
-   - **Task Manager** → **More Details** → sort by CPU or Power
+   - **Task Manager** -> **More Details** -> sort by CPU or Power
 2. Reduce screen brightness
 3. Enable battery saver mode
 4. Disable Bluetooth and WiFi when not needed
@@ -146,7 +146,7 @@ powercfg /sleepstudy
 **Quick checks:**
 1. Restart the laptop
 2. Check Task Manager for high CPU, RAM, or disk usage
-3. Check available disk space — Windows needs at least 10-15% free
+3. Check available disk space - Windows needs at least 10-15% free
 
 ```powershell
 # Check CPU usage
@@ -170,7 +170,7 @@ Get-CimInstance Win32_StartupCommand | Select-Object Name, Command, Location
 
 ### Overheating
 1. Check that vents are not blocked
-2. Use the laptop on a hard flat surface — not a bed or carpet
+2. Use the laptop on a hard flat surface - not a bed or carpet
 3. Clean vents with compressed air
 4. Check CPU temperature
 
@@ -227,7 +227,7 @@ netsh wlan delete profile name="NetworkName"
 ### No Sound
 1. Check volume is not muted
 2. Check the correct playback device is selected
-3. Right-click the speaker icon → **Open Sound Settings**
+3. Right-click the speaker icon -> **Open Sound Settings**
 4. Test with headphones to determine if it's speakers or software
 
 ```powershell
@@ -250,7 +250,7 @@ Start-Service AudioSrv
 4. Try an external USB keyboard
 
 ### Touchpad Not Working
-1. Check if touchpad is disabled — many laptops have **Fn + F9** (or similar) to toggle it
+1. Check if touchpad is disabled - many laptops have **Fn + F9** (or similar) to toggle it
 2. Check in **Device Manager** that the touchpad driver is installed
 
 ```powershell
@@ -268,8 +268,8 @@ Get-PnpDevice -FriendlyName "*touchpad*" | Enable-PnpDevice -Confirm:$false
 
 ### Immediate Steps
 1. Note the error code on screen e.g. `DRIVER_IRQL_NOT_LESS_OR_EQUAL`
-2. Let the system restart — Windows automatically creates a dump file
-3. Check Event Viewer → **Windows Logs** → **System** for critical errors
+2. Let the system restart - Windows automatically creates a dump file
+3. Check Event Viewer -> **Windows Logs** -> **System** for critical errors
 
 ```powershell
 # Read minidump files (requires WinDbg or third-party tool)
@@ -303,10 +303,10 @@ DISM /Online /Cleanup-Image /RestoreHealth
 ## 9. Common Fixes Quick Reference
 
 ```powershell
-# System File Checker — repairs corrupted Windows files
+# System File Checker - repairs corrupted Windows files
 sfc /scannow
 
-# DISM — repairs Windows image
+# DISM - repairs Windows image
 DISM /Online /Cleanup-Image /RestoreHealth
 
 # Check disk for errors
@@ -346,11 +346,11 @@ Get-PnpDevice | Where-Object Status -ne "OK" | Select-Object FriendlyName, Statu
 ---
 
 ## Notes
-- Always ask the user "what changed recently?" — new software, updates, or physical damage often explain the problem
-- Document the exact error message — searching it online usually leads directly to the solution
-- Never skip the restart — it solves more problems than any other step
+- Always ask the user "what changed recently?" - new software, updates, or physical damage often explain the problem
+- Document the exact error message - searching it online usually leads directly to the solution
+- Never skip the restart - it solves more problems than any other step
 - Check the manufacturer's support site for model-specific issues and driver downloads
-- If under warranty — contact the manufacturer before opening the device
+- If under warranty - contact the manufacturer before opening the device
 
 ---
 

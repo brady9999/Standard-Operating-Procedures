@@ -13,12 +13,12 @@
 |------|-----------|---------------|
 | **HID** | Human Interface Device | A class of USB devices including keyboards, mice, and game controllers |
 | **USB Hub** | USB Hub | A device that expands one USB port into multiple ports |
-| **Powered Hub** | Powered USB Hub | A USB hub with its own power supply — better for power-hungry devices |
+| **Powered Hub** | Powered USB Hub | A USB hub with its own power supply - better for power-hungry devices |
 | **Driver** | Device Driver | Software allowing the OS to communicate with the device |
 | **Plug and Play** | Plug and Play | Technology that automatically detects and installs drivers for new devices |
 | **Device Manager** | Device Manager | Windows tool for viewing and managing all connected hardware |
-| **DPI** | Dots Per Inch | Sensitivity setting for mice — higher DPI = faster cursor movement |
-| **Hz / Refresh Rate** | Refresh Rate | How many times per second a monitor updates — higher is smoother |
+| **DPI** | Dots Per Inch | Sensitivity setting for mice - higher DPI = faster cursor movement |
+| **Hz / Refresh Rate** | Refresh Rate | How many times per second a monitor updates - higher is smoother |
 | **EDID** | Extended Display Identification Data | Data a monitor sends to the GPU describing its capabilities |
 | **KVM** | Keyboard, Video, Mouse Switch | A device allowing one keyboard/monitor/mouse to control multiple computers |
 
@@ -26,11 +26,11 @@
 
 ## Overview
 Peripheral issues are usually caused by one of three things:
-1. **Physical connection** — cable, port, or device damage
-2. **Driver** — missing, corrupted, or outdated software
-3. **Settings** — wrong configuration in Windows or the device's software
+1. **Physical connection** - cable, port, or device damage
+2. **Driver** - missing, corrupted, or outdated software
+3. **Settings** - wrong configuration in Windows or the device's software
 
-Always try the device on a different computer first — this immediately tells you if the problem is the device or the system.
+Always try the device on a different computer first - this immediately tells you if the problem is the device or the system.
 
 ---
 
@@ -43,7 +43,7 @@ Always try the device on a different computer first — this immediately tells y
 3. Try a different cable (HDMI, DisplayPort, DVI)
 4. Try a different port on the GPU
 5. Try the monitor on a different computer
-6. Connect directly to GPU — not through a KVM or hub
+6. Connect directly to GPU - not through a KVM or hub
 ```
 
 ### Monitor Showing Wrong Resolution
@@ -53,7 +53,7 @@ Get-WmiObject Win32_VideoController |
   Select-Object Name, CurrentHorizontalResolution, CurrentVerticalResolution, CurrentRefreshRate
 
 # Set resolution via Display Settings
-# Right-click desktop → Display Settings → Resolution → select correct resolution
+# Right-click desktop -> Display Settings -> Resolution -> select correct resolution
 ```
 
 ### Monitor Flickering
@@ -67,15 +67,15 @@ Get-WmiObject Win32_VideoController | Select-Object DriverVersion, DriverDate
 
 **Common causes:**
 - Wrong refresh rate set (try 60Hz if flickering at 75Hz+)
-- Faulty cable — try a new cable
-- Loose cable connection — reseat firmly
-- Driver issue — update or roll back display driver
+- Faulty cable - try a new cable
+- Loose cable connection - reseat firmly
+- Driver issue - update or roll back display driver
 - Monitor hardware failure
 
 ### Dead Pixels
-- Run a dead pixel test — display solid red, green, blue, white, and black full screen
-- Single dead pixel — usually cosmetic and covered by warranty if within threshold
-- Large cluster or line of dead pixels — panel failure, replacement needed
+- Run a dead pixel test - display solid red, green, blue, white, and black full screen
+- Single dead pixel - usually cosmetic and covered by warranty if within threshold
+- Large cluster or line of dead pixels - panel failure, replacement needed
 
 ### Color Issues
 ```powershell
@@ -83,7 +83,7 @@ Get-WmiObject Win32_VideoController | Select-Object DriverVersion, DriverDate
 Get-WmiObject Win32_VideoController | Select-Object Name
 
 # Reset color calibration
-# Control Panel → Color Management → All Profiles → Reset
+# Control Panel -> Color Management -> All Profiles -> Reset
 ```
 
 ---
@@ -109,13 +109,13 @@ Get-PnpDevice -FriendlyName "*keyboard*" | Enable-PnpDevice -Confirm:$false
 1. Try a different USB port
 2. Try the keyboard on another computer
 3. Check for debris under keys
-4. For wireless keyboards — replace batteries or check USB receiver
+4. For wireless keyboards - replace batteries or check USB receiver
 
 ### Keyboard Typing Wrong Characters
 - Check the keyboard language/layout in Settings
-- **Settings → Time & Language → Language → Keyboard**
+- **Settings -> Time & Language -> Language -> Keyboard**
 - Press **Windows + Space** to switch between input languages
-- Check for sticky keys: **Settings → Ease of Access → Keyboard**
+- Check for sticky keys: **Settings -> Ease of Access -> Keyboard**
 
 ### Num Lock / Caps Lock Issues
 ```powershell
@@ -144,8 +144,8 @@ Get-PnpDevice -FriendlyName "*mouse*" | Enable-PnpDevice -Confirm:$false
 **Physical checks:**
 1. Try a different USB port
 2. Try the mouse on another computer
-3. Check mouse sensor — clean the bottom optical sensor
-4. For wireless mice — replace batteries, re-pair USB receiver
+3. Check mouse sensor - clean the bottom optical sensor
+4. For wireless mice - replace batteries, re-pair USB receiver
 
 ### Mouse Cursor Jumping or Erratic
 - Clean the mouse pad or surface
@@ -173,7 +173,7 @@ Get-PnpDevice | Where-Object {$_.InstanceId -like "USB*"} | Select-Object Friend
 Get-PnpDevice | Where-Object {$_.Status -ne "OK"} | Select-Object FriendlyName, Status, Problem
 
 # Reset USB controllers
-# Device Manager → Universal Serial Bus Controllers → right-click each Root Hub → Uninstall
+# Device Manager -> Universal Serial Bus Controllers -> right-click each Root Hub -> Uninstall
 # Then scan for hardware changes
 
 # View USB event log
@@ -185,13 +185,13 @@ Get-WinEvent -LogName "Microsoft-Windows-DriverFrameworks-UserMode/Operational" 
 1. Try a different USB port
 2. Try a different USB cable
 3. Test the device on another computer
-4. Try connecting directly to the PC — not through a hub
+4. Try connecting directly to the PC - not through a hub
 5. Use a powered USB hub if the device needs more power
 6. Check Device Manager for errors
 7. Reinstall the device driver
 
 ### USB Selective Suspend (Power Management Issues)
-Windows may power down USB ports to save energy — causing devices to disconnect.
+Windows may power down USB ports to save energy - causing devices to disconnect.
 
 ```powershell
 # Disable USB selective suspend
@@ -199,8 +199,8 @@ powercfg -setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48
 powercfg -setactive SCHEME_CURRENT
 
 # Or via GUI:
-# Power Options → Change plan settings → Change advanced power settings
-# USB Settings → USB selective suspend setting → Disabled
+# Power Options -> Change plan settings -> Change advanced power settings
+# USB Settings -> USB selective suspend setting -> Disabled
 ```
 
 ---
@@ -220,14 +220,14 @@ Get-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Capabili
 ```
 
 ### App Can't Access Webcam
-1. **Settings → Privacy & Security → Camera**
+1. **Settings -> Privacy & Security -> Camera**
 2. Ensure "Camera access" is ON
 3. Ensure the specific app has camera permission
 4. Close other apps that might be using the camera
 
 ### Poor Image Quality
 - Clean the webcam lens
-- Check lighting — face a light source, don't have a bright window behind you
+- Check lighting - face a light source, don't have a bright window behind you
 - Update webcam driver
 - Adjust camera settings in the webcam software
 
@@ -252,13 +252,13 @@ Restart-Service AudioEndpointBuilder
 **Physical checks:**
 1. Check the headset is fully plugged in
 2. Try a different USB port (for USB headsets)
-3. For 3.5mm headsets — check the correct jack (green = audio, pink = microphone)
+3. For 3.5mm headsets - check the correct jack (green = audio, pink = microphone)
 4. Combo jack headsets need a single 4-pole jack
 
 ### Setting Default Audio Device
 
 ```powershell
-# GUI: Right-click speaker icon → Open Sound Settings → Choose output/input device
+# GUI: Right-click speaker icon -> Open Sound Settings -> Choose output/input device
 
 # Via PowerShell (requires AudioDeviceCmdlets)
 Install-Module -Name AudioDeviceCmdlets
@@ -267,7 +267,7 @@ Set-AudioDevice -Index 2  # Set by index number
 ```
 
 ### Microphone Not Working
-1. **Settings → System → Sound → Input** — verify mic is selected
+1. **Settings -> System -> Sound -> Input** - verify mic is selected
 2. Check microphone privacy settings
 3. Check mic volume is not zero
 4. Test in Windows Voice Recorder app
@@ -276,13 +276,13 @@ Set-AudioDevice -Index 2  # Set by index number
 
 ## 7. Barcode Scanners and Specialty Devices
 
-Barcode scanners typically appear as keyboards to Windows — they send keystrokes when scanning.
+Barcode scanners typically appear as keyboards to Windows - they send keystrokes when scanning.
 
 **Common issues:**
-- Wrong character encoding — check scanner configuration for the character set
-- Missing prefix/suffix characters — configure in scanner settings
-- Slow scan speed — check USB polling rate
-- Not recognized — try different USB port, check HID driver
+- Wrong character encoding - check scanner configuration for the character set
+- Missing prefix/suffix characters - configure in scanner settings
+- Slow scan speed - check USB polling rate
+- Not recognized - try different USB port, check HID driver
 
 ```powershell
 # View HID devices (scanners appear here)
@@ -299,7 +299,7 @@ Get-PnpDevice | Where-Object {$_.Class -eq "HIDClass"} | Select-Object FriendlyN
 | **Code 18** | Device drivers need reinstalling | Reinstall driver |
 | **Code 19** | Registry error | Run registry repair or reinstall driver |
 | **Code 28** | Drivers not installed | Install correct driver |
-| **Code 43** | Device stopped — Windows reported an error | Reinstall driver, check hardware |
+| **Code 43** | Device stopped - Windows reported an error | Reinstall driver, check hardware |
 | **Code 45** | Device not connected | Reconnect device |
 
 ```powershell
@@ -356,11 +356,11 @@ Get-WmiObject Win32_VideoController
 ---
 
 ## Notes
-- Most peripheral issues are solved by trying the device on another computer first — this isolates hardware vs system issues
-- USB 3.0 ports are blue — use these for high-bandwidth devices (webcams, external drives)
-- Avoid USB hubs for power-hungry devices — use direct port connections or powered hubs
-- Always download drivers from the manufacturer's website — not from third-party driver sites
-- Generic Windows drivers work for basic functions — manufacturer drivers unlock full features
+- Most peripheral issues are solved by trying the device on another computer first - this isolates hardware vs system issues
+- USB 3.0 ports are blue - use these for high-bandwidth devices (webcams, external drives)
+- Avoid USB hubs for power-hungry devices - use direct port connections or powered hubs
+- Always download drivers from the manufacturer's website - not from third-party driver sites
+- Generic Windows drivers work for basic functions - manufacturer drivers unlock full features
 
 ---
 

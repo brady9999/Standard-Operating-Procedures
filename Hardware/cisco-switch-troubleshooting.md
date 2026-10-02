@@ -29,11 +29,11 @@
 ---
 
 ## Overview
-Cisco switch troubleshooting follows a layered approach — start at the physical layer and work up. Most issues fall into:
-- **Physical** — cables, ports, LEDs, power
-- **Data Link** — VLANs, trunks, STP, MAC table
-- **Network** — IP addressing, routing between VLANs
-- **Configuration** — wrong settings, missing config
+Cisco switch troubleshooting follows a layered approach - start at the physical layer and work up. Most issues fall into:
+- **Physical** - cables, ports, LEDs, power
+- **Data Link** - VLANs, trunks, STP, MAC table
+- **Network** - IP addressing, routing between VLANs
+- **Configuration** - wrong settings, missing config
 
 ---
 
@@ -49,17 +49,17 @@ Cisco switch troubleshooting follows a layered approach — start at the physica
 ### Port LEDs
 | Color/State | Meaning |
 |------------|---------|
-| Off | No link — no cable or device |
+| Off | No link - no cable or device |
 | Green | Link established |
-| Blinking Green | Activity — traffic passing |
+| Blinking Green | Activity - traffic passing |
 | Amber | Port disabled or STP blocking |
 | Alternating Green/Amber | Link fault |
 
 ### Mode Button
 Press the **Mode** button to cycle through LED modes:
-- **STAT** — port status (default)
-- **DPLX** — duplex (green = full, amber = half)
-- **SPEED** — port speed
+- **STAT** - port status (default)
+- **DPLX** - duplex (green = full, amber = half)
+- **SPEED** - port speed
 
 ---
 
@@ -77,7 +77,7 @@ SW-CORE-01# show interfaces status
 
 ! Check if port is administratively shut down
 SW-CORE-01# show running-config interface FastEthernet 0/1
-! If you see "shutdown" — the port is manually disabled
+! If you see "shutdown" - the port is manually disabled
 
 ! Bring the port up
 SW-CORE-01(config)# interface FastEthernet 0/1
@@ -91,7 +91,7 @@ SW-CORE-01(config-if)# no shutdown
 | Port shows notconnect | Device not sending link signal | Check device NIC, try different cable |
 | Port shows disabled | Manually shut down | `no shutdown` on the interface |
 | Port shows err-disabled | Error condition triggered shutdown | See ErrDisabled section below |
-| Port amber | STP blocking | Normal if redundant link — check STP |
+| Port amber | STP blocking | Normal if redundant link - check STP |
 
 ---
 
@@ -105,10 +105,10 @@ SW-CORE-01# show interfaces status err-disabled
 SW-CORE-01# show errdisable recovery
 
 ! Common causes shown in the output:
-! - psecure-violation  → Port security MAC violation
-! - bpduguard         → BPDU received on PortFast port
-! - channel-misconfig → EtherChannel misconfiguration
-! - link-flap         → Port was flapping up/down too fast
+! - psecure-violation  -> Port security MAC violation
+! - bpduguard         -> BPDU received on PortFast port
+! - channel-misconfig -> EtherChannel misconfiguration
+! - link-flap         -> Port was flapping up/down too fast
 
 ! Manually recover the port
 SW-CORE-01(config)# interface FastEthernet 0/1
@@ -125,14 +125,14 @@ SW-CORE-01(config)# errdisable recovery interval 300
 ## 3. VLAN Issues
 
 ```ios
-! Check VLAN database — is the VLAN created?
+! Check VLAN database - is the VLAN created?
 SW-CORE-01# show vlan brief
 
 ! Check which VLAN a port is assigned to
 SW-CORE-01# show interfaces FastEthernet 0/1 switchport
 ! Look for: Access Mode VLAN and Operational Mode
 
-! Check trunk ports — which VLANs are allowed?
+! Check trunk ports - which VLANs are allowed?
 SW-CORE-01# show interfaces trunk
 ! Look for: VLANs allowed and active in management domain
 
@@ -147,7 +147,7 @@ SW-CORE-01# show vlan id 10
 |---------|-------|-----|
 | Device can't reach others on same VLAN | VLAN not created or port in wrong VLAN | Check `show vlan brief`, assign correct VLAN |
 | VLAN traffic not crossing trunk | VLAN not in allowed list | `switchport trunk allowed vlan add X` |
-| VLAN shows as inactive | VLAN deleted or not created on this switch | Recreate VLAN: `vlan X` → `name NAME` |
+| VLAN shows as inactive | VLAN deleted or not created on this switch | Recreate VLAN: `vlan X` -> `name NAME` |
 | Native VLAN mismatch warning | Both sides have different native VLANs | Match native VLAN on both trunk ends |
 
 ---
@@ -226,7 +226,7 @@ Speed/duplex mismatch causes poor performance, errors, and retransmissions even 
 ```ios
 ! Check speed and duplex on an interface
 SW-CORE-01# show interfaces FastEthernet 0/1
-! Look for: Full-duplex, 100Mb/s — or Half-duplex which indicates mismatch
+! Look for: Full-duplex, 100Mb/s - or Half-duplex which indicates mismatch
 
 ! Check all interfaces for duplex issues
 SW-CORE-01# show interfaces status
@@ -250,7 +250,7 @@ SW-CORE-01(config-if)# duplex auto
 ```ios
 ! Check for errors indicating duplex mismatch
 SW-CORE-01# show interfaces FastEthernet 0/1
-! Look for: input errors, CRC, late collision — these indicate duplex mismatch
+! Look for: input errors, CRC, late collision - these indicate duplex mismatch
 ```
 
 ---
@@ -318,7 +318,7 @@ SW-CORE-01# traceroute 192.168.1.1
 ! Check ARP table
 SW-CORE-01# show arp
 
-! Check CDP neighbors — verify connected devices
+! Check CDP neighbors - verify connected devices
 SW-CORE-01# show cdp neighbors
 SW-CORE-01# show cdp neighbors detail
 
@@ -357,18 +357,18 @@ SW-CORE-01# show flash
 
 ```
 Device can't communicate?
-├── Check port LED → Off?
-│   └── Cable issue → Try different cable/port
+├── Check port LED -> Off?
+│   └── Cable issue -> Try different cable/port
 ├── Port shows err-disabled?
-│   └── show errdisable recovery → Fix cause → shutdown/no shutdown
+│   └── show errdisable recovery -> Fix cause -> shutdown/no shutdown
 ├── Port up but no VLAN traffic?
-│   └── show vlan brief → VLAN exists? → show interfaces trunk → VLAN allowed?
+│   └── show vlan brief -> VLAN exists? -> show interfaces trunk -> VLAN allowed?
 ├── Port slow or errors?
-│   └── show interfaces → CRC/collision errors? → Check duplex mismatch
+│   └── show interfaces -> CRC/collision errors? -> Check duplex mismatch
 ├── Port takes 30s to come up?
 │   └── Enable spanning-tree portfast on access port
 └── Everything looks right but still broken?
-    └── show mac address-table → Is the MAC being learned on the right port?
+    └── show mac address-table -> Is the MAC being learned on the right port?
 ```
 
 ---
@@ -377,8 +377,8 @@ Device can't communicate?
 
 ```ios
 ! Most useful troubleshooting commands
-show interfaces status          ! All ports — status, VLAN, speed, duplex
-show interfaces FastEthernet 0/1 ! Detailed — errors, counters, state
+show interfaces status          ! All ports - status, VLAN, speed, duplex
+show interfaces FastEthernet 0/1 ! Detailed - errors, counters, state
 show vlan brief                 ! All VLANs and port assignments
 show interfaces trunk           ! Trunk ports and allowed VLANs
 show spanning-tree              ! STP state for all VLANs
@@ -394,11 +394,11 @@ ping 192.168.1.1                ! Connectivity test
 ---
 
 ## Notes
-- Always start with `show interfaces status` — it gives the fastest overview of all port states
+- Always start with `show interfaces status` - it gives the fastest overview of all port states
 - ErrDisabled ports must be manually recovered with `shutdown` then `no shutdown` unless auto-recovery is configured
-- STP is often the cause of slow port activation — use PortFast on all access ports
-- Duplex mismatch is subtle — the link is up but performance is terrible and there are CRC errors
-- Always save config after changes — `wr`
+- STP is often the cause of slow port activation - use PortFast on all access ports
+- Duplex mismatch is subtle - the link is up but performance is terrible and there are CRC errors
+- Always save config after changes - `wr`
 
 ---
 

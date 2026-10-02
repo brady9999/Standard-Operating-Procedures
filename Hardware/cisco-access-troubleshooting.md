@@ -17,8 +17,8 @@
 | **WLC** | Wireless LAN Controller | A controller managing multiple APs centrally |
 | **CAPWAP** | Control and Provisioning of Wireless Access Points | The protocol between AP and WLC |
 | **PoE** | Power over Ethernet | Powering the AP through the ethernet cable |
-| **RSSI** | Received Signal Strength Indicator | Signal strength — closer to 0 dBm is stronger |
-| **SNR** | Signal-to-Noise Ratio | Signal quality — higher is better |
+| **RSSI** | Received Signal Strength Indicator | Signal strength - closer to 0 dBm is stronger |
+| **SNR** | Signal-to-Noise Ratio | Signal quality - higher is better |
 | **Channel** | Wireless Channel | A specific frequency within the band |
 | **Band** | Frequency Band | 2.4 GHz or 5 GHz wireless frequencies |
 | **Roaming** | Wireless Roaming | A client moving between APs while staying connected |
@@ -32,11 +32,11 @@
 
 ## Overview
 Wireless troubleshooting is more complex than wired troubleshooting because the medium is invisible and shared. Issues can be caused by:
-- **Power** — AP not receiving enough PoE power
-- **Physical** — AP placement, obstructions, antenna issues
-- **RF** — interference, channel overlap, signal strength
-- **Configuration** — wrong SSID, VLAN, authentication settings
-- **Client** — device-specific wireless driver or settings issues
+- **Power** - AP not receiving enough PoE power
+- **Physical** - AP placement, obstructions, antenna issues
+- **RF** - interference, channel overlap, signal strength
+- **Configuration** - wrong SSID, VLAN, authentication settings
+- **Client** - device-specific wireless driver or settings issues
 
 ---
 
@@ -46,9 +46,9 @@ Wireless troubleshooting is more complex than wired troubleshooting because the 
 | LED Color/Pattern | Meaning |
 |------------------|---------|
 | Off | No power |
-| Blinking Green | Normal operation — booting or associated |
+| Blinking Green | Normal operation - booting or associated |
 | Solid Green | Associated with WLC and operational |
-| Blinking Amber | Discovery phase — looking for WLC |
+| Blinking Amber | Discovery phase - looking for WLC |
 | Solid Amber | Firmware loading or error |
 | Alternating Red/Amber | Firmware upgrade in progress |
 | Solid Red | Boot failure or critical error |
@@ -69,7 +69,7 @@ Physical checks:
 ```
 
 ```ios
-! On the switch — check PoE status
+! On the switch - check PoE status
 SW-CORE-01# show power inline
 
 ! Check a specific port
@@ -79,7 +79,7 @@ SW-CORE-01# show power inline FastEthernet 0/12
 ! Check total PoE budget
 SW-CORE-01# show power inline consumption
 
-! If PoE not negotiating — reset the port
+! If PoE not negotiating - reset the port
 SW-CORE-01(config)# interface FastEthernet 0/12
 SW-CORE-01(config-if)# shutdown
 SW-CORE-01(config-if)# no shutdown
@@ -101,11 +101,11 @@ SW-CORE-01(config-if)# no shutdown
 Lightweight APs must join a WLC before they can operate. The discovery process uses several methods.
 
 ```ios
-! On the WLC — check AP join status
+! On the WLC - check AP join status
 (WLC)# show ap join stats summary all
 (WLC)# show ap summary
 
-! On the AP console — check CAPWAP status
+! On the AP console - check CAPWAP status
 AP# show capwap client rcb
 AP# show capwap client config
 
@@ -116,16 +116,16 @@ AP# debug capwap client errors
 
 ### AP Discovery Order
 ```
-1. DHCP Option 43     → WLC IP sent with DHCP lease
-2. DNS               → AP resolves "CISCO-CAPWAP-CONTROLLER.domain"
-3. Broadcast         → AP broadcasts on local subnet
-4. Primed WLC        → WLC IP manually configured on AP
-5. Previously joined → AP remembers last WLC
+1. DHCP Option 43     -> WLC IP sent with DHCP lease
+2. DNS               -> AP resolves "CISCO-CAPWAP-CONTROLLER.domain"
+3. Broadcast         -> AP broadcasts on local subnet
+4. Primed WLC        -> WLC IP manually configured on AP
+5. Previously joined -> AP remembers last WLC
 ```
 
 ### Configuring DHCP Option 43
 ```powershell
-# On Windows DHCP Server — add Option 43 with WLC IP
+# On Windows DHCP Server - add Option 43 with WLC IP
 # WLC IP 192.168.1.100 in hex = c0 a8 01 64
 # Format for Option 43: f1:04:c0:a8:01:64
 
@@ -135,8 +135,8 @@ Set-DhcpServerv4OptionValue -ScopeId 192.168.1.0 `
 
 ### Firewall Ports Required for CAPWAP
 ```
-UDP 5246 — CAPWAP control channel
-UDP 5247 — CAPWAP data channel
+UDP 5246 - CAPWAP control channel
+UDP 5247 - CAPWAP data channel
 ```
 
 ### Common AP Join Issues
@@ -155,7 +155,7 @@ UDP 5247 — CAPWAP data channel
 
 ### Client Can't See the SSID
 ```ios
-! On autonomous AP — verify SSID is broadcast
+! On autonomous AP - verify SSID is broadcast
 AP# show dot11 bssid
 ! SSID should appear with guest-mode enabled
 
@@ -186,7 +186,7 @@ AP# show dot11 associations
 ! Check client details
 AP# show dot11 associations all-client
 
-! On WLC — check client association
+! On WLC - check client association
 (WLC)# show client summary
 (WLC)# show client detail [MAC-ADDRESS]
 ```
@@ -248,7 +248,7 @@ AP# show interfaces Dot11Radio0 | include retry|error|retransmit
 ! Check client associations
 AP# show dot11 associations
 
-! On WLC — check for client roaming issues
+! On WLC - check for client roaming issues
 (WLC)# show client roam-history [MAC-ADDRESS]
 ```
 
@@ -274,14 +274,14 @@ The AP's switch port must be correctly configured or VLAN traffic won't work.
 SW-CORE-01# show interfaces FastEthernet 0/12 switchport
 ! Look for: mode (access or trunk) and VLAN assignment
 
-! For single SSID — access port
+! For single SSID - access port
 SW-CORE-01(config)# interface FastEthernet 0/12
 SW-CORE-01(config-if)# switchport mode access
 SW-CORE-01(config-if)# switchport access vlan 10
 SW-CORE-01(config-if)# spanning-tree portfast
 SW-CORE-01(config-if)# no shutdown
 
-! For multiple SSIDs on different VLANs — trunk port
+! For multiple SSIDs on different VLANs - trunk port
 SW-CORE-01(config)# interface FastEthernet 0/12
 SW-CORE-01(config-if)# switchport mode trunk
 SW-CORE-01(config-if)# switchport trunk native vlan 10
@@ -292,7 +292,7 @@ SW-CORE-01(config-if)# no shutdown
 
 ---
 
-## 7. Autonomous AP — Common Diagnostic Commands
+## 7. Autonomous AP - Common Diagnostic Commands
 
 ```ios
 ! AP software version
@@ -332,14 +332,14 @@ Use when the AP is completely misconfigured or the password is unknown.
 
 ### Autonomous AP Factory Reset
 ```
-Method 1 — MODE button:
+Method 1 - MODE button:
 1. Unplug the AP ethernet cable
 2. Hold the MODE button on the AP
 3. Reconnect the ethernet cable while holding MODE
 4. Hold for 20-30 seconds until the LED turns red
-5. Release — AP will reset to factory defaults
+5. Release - AP will reset to factory defaults
 
-Method 2 — Console:
+Method 2 - Console:
 AP# write erase
 AP# reload
 ```
@@ -368,12 +368,12 @@ AP will reset and rejoin the WLC with default settings
 ---
 
 ## Notes
-- RSSI above -70 dBm is good — below -80 dBm will cause performance issues
-- 5 GHz is almost always preferred over 2.4 GHz — push dual-band clients to 5 GHz
-- Non-overlapping 2.4 GHz channels are 1, 6, and 11 — using any other causes overlap
-- PoE+ (802.3at) is required for newer high-power APs — standard PoE (802.3af) may not be enough
-- CAPWAP uses UDP 5246 and 5247 — if a firewall sits between AP and WLC both ports must be open
-- Always check the switch port configuration first — most AP issues are actually switch port misconfigurations
+- RSSI above -70 dBm is good - below -80 dBm will cause performance issues
+- 5 GHz is almost always preferred over 2.4 GHz - push dual-band clients to 5 GHz
+- Non-overlapping 2.4 GHz channels are 1, 6, and 11 - using any other causes overlap
+- PoE+ (802.3at) is required for newer high-power APs - standard PoE (802.3af) may not be enough
+- CAPWAP uses UDP 5246 and 5247 - if a firewall sits between AP and WLC both ports must be open
+- Always check the switch port configuration first - most AP issues are actually switch port misconfigurations
 
 ---
 

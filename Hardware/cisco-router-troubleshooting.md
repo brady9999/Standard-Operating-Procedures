@@ -14,7 +14,7 @@
 | **Routing Table** | Routing Table | The list of known networks and how to reach them |
 | **Default Route** | Default Route | The catch-all route used when no specific route matches (0.0.0.0/0) |
 | **Next Hop** | Next Hop | The next router IP address packets are forwarded to |
-| **Administrative Distance** | AD | A rating of route trustworthiness — lower is preferred |
+| **Administrative Distance** | AD | A rating of route trustworthiness - lower is preferred |
 | **NAT** | Network Address Translation | Translates private IPs to public IPs |
 | **PAT** | Port Address Translation | Many-to-one NAT sharing one public IP |
 | **ACL** | Access Control List | Rules permitting or denying traffic |
@@ -28,11 +28,11 @@
 ---
 
 ## Overview
-Router troubleshooting follows the OSI model — start at Layer 1 (physical) and work up to Layer 3 (routing). Most issues fall into:
-- **Physical** — cables, interface status, power
-- **Data Link** — encapsulation, clocking (serial links)
-- **Network** — routing table, NAT, ACLs
-- **Configuration** — missing or wrong settings
+Router troubleshooting follows the OSI model - start at Layer 1 (physical) and work up to Layer 3 (routing). Most issues fall into:
+- **Physical** - cables, interface status, power
+- **Data Link** - encapsulation, clocking (serial links)
+- **Network** - routing table, NAT, ACLs
+- **Configuration** - missing or wrong settings
 
 ---
 
@@ -63,7 +63,7 @@ RTR-MAIN-01# show interfaces GigabitEthernet 0/0 | include error|reset|CRC
 
 | Line / Protocol | Meaning | Common Cause |
 |----------------|---------|-------------|
-| up / up | Working | — |
+| up / up | Working | - |
 | up / down | Physical OK, Layer 2 problem | Encapsulation mismatch, keepalive issue |
 | down / down | No physical signal | Cable unplugged, device off, wrong cable |
 | admin down / down | Manually disabled | Run `no shutdown` |
@@ -76,7 +76,7 @@ RTR-MAIN-01# show interfaces GigabitEthernet 0/0 | include error|reset|CRC
 ! Check the routing table
 RTR-MAIN-01# show ip route
 ! Look for:
-! S* 0.0.0.0/0 — default route (needed for internet)
+! S* 0.0.0.0/0 - default route (needed for internet)
 ! C  = connected network
 ! S  = static route
 ! O  = OSPF route
@@ -94,7 +94,7 @@ RTR-MAIN-01# ping 192.168.1.1
 ! Trace the path
 RTR-MAIN-01# traceroute 8.8.8.8
 
-! Check ARP table — can the router reach the next hop?
+! Check ARP table - can the router reach the next hop?
 RTR-MAIN-01# show arp
 ```
 
@@ -129,7 +129,7 @@ RTR-MAIN-01# show ip interface GigabitEthernet 0/0
 ! Clear NAT translation table
 RTR-MAIN-01# clear ip nat translation *
 
-! Debug NAT (use carefully — verbose output)
+! Debug NAT (use carefully - verbose output)
 RTR-MAIN-01# debug ip nat
 RTR-MAIN-01# undebug all
 ```
@@ -177,9 +177,9 @@ RTR-MAIN-01# undebug all
 ### ACL Troubleshooting Logic
 ```
 Traffic being blocked unexpectedly?
-1. show access-lists → check hit counts → which rule is matching?
-2. ACL rules are processed top to bottom — first match wins
-3. There is an implicit deny all at the end — if nothing matches, traffic is denied
+1. show access-lists -> check hit counts -> which rule is matching?
+2. ACL rules are processed top to bottom - first match wins
+3. There is an implicit deny all at the end - if nothing matches, traffic is denied
 4. Check both inbound and outbound ACLs on the interface
 5. Standard ACLs should be placed close to the destination
 6. Extended ACLs should be placed close to the source
@@ -192,12 +192,12 @@ Traffic being blocked unexpectedly?
 ```ios
 ! Check OSPF neighbor relationships
 RTR-MAIN-01# show ip ospf neighbor
-! State should be FULL — anything else indicates a problem
+! State should be FULL - anything else indicates a problem
 
 ! OSPF neighbor states:
 ! FULL     = working correctly
-! 2WAY     = DR/BDR election — normal on multi-access networks
-! EXSTART  = negotiating master/slave — should progress quickly
+! 2WAY     = DR/BDR election - normal on multi-access networks
+! EXSTART  = negotiating master/slave - should progress quickly
 ! EXCHANGE = exchanging DBD packets
 ! LOADING  = exchanging LSAs
 ! INIT     = received hello but not two-way yet
@@ -238,7 +238,7 @@ Interface flapping (repeatedly going up/down) causes routing instability and ser
 ```ios
 ! Check interface for carrier transitions
 RTR-MAIN-01# show interfaces GigabitEthernet 0/0
-! Look for: X input resets, X carrier transitions — high numbers indicate flapping
+! Look for: X input resets, X carrier transitions - high numbers indicate flapping
 
 ! View interface history
 RTR-MAIN-01# show interfaces GigabitEthernet 0/0 | include transition|reset|flap
@@ -252,9 +252,9 @@ RTR-MAIN-01(config-if)# dampening
 ```
 
 **Common causes of flapping:**
-- Faulty cable — replace the cable
-- Faulty SFP — replace the SFP transceiver
-- Speed/duplex mismatch — set manually on both ends
+- Faulty cable - replace the cable
+- Faulty SFP - replace the SFP transceiver
+- Speed/duplex mismatch - set manually on both ends
 - PoE power issue (if applicable)
 - Remote device NIC issues
 
@@ -272,10 +272,10 @@ RTR-MAIN-01# show processes cpu sorted
 RTR-MAIN-01# show processes cpu history
 
 ! Common high CPU causes:
-! - IP Input process high → routing loop or broadcast storm
-! - Spanning Tree → STP topology change
-! - BGP/OSPF → routing instability
-! - CEF process → CEF switching issue
+! - IP Input process high -> routing loop or broadcast storm
+! - Spanning Tree -> STP topology change
+! - BGP/OSPF -> routing instability
+! - CEF process -> CEF switching issue
 ```
 
 ---
@@ -302,7 +302,7 @@ RTR-MAIN-01# show processes memory sorted
 ! Basic ping
 RTR-MAIN-01# ping 8.8.8.8
 
-! Extended ping — test from specific source interface
+! Extended ping - test from specific source interface
 RTR-MAIN-01# ping 8.8.8.8 source GigabitEthernet 0/0
 RTR-MAIN-01# ping 8.8.8.8 repeat 100 size 1500
 
@@ -374,11 +374,11 @@ RTR-MAIN-01# show version | include IOS
 ---
 
 ## Notes
-- Always `undebug all` after using any debug command — debug output consumes significant CPU
+- Always `undebug all` after using any debug command - debug output consumes significant CPU
 - The routing table (`show ip route`) is the most important command for Layer 3 troubleshooting
-- ACL hit counters show you exactly which rule is matching — use this to debug unexpected blocks
-- OSPF neighbor state must be FULL for routes to be exchanged — any other state needs investigation
-- Always save config after changes — `wr`
+- ACL hit counters show you exactly which rule is matching - use this to debug unexpected blocks
+- OSPF neighbor state must be FULL for routes to be exchanged - any other state needs investigation
+- Always save config after changes - `wr`
 
 ---
 

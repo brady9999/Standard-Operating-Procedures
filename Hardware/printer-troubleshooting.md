@@ -21,7 +21,7 @@
 | **Ink Cartridge** | Ink Cartridge | The replaceable container of ink in inkjet printers |
 | **Fuser** | Fuser Unit | The component in a laser printer that melts toner onto paper |
 | **Drum** | Imaging Drum | The photosensitive cylinder in a laser printer |
-| **Network Printer** | Network Printer | A printer connected to the network — shared by multiple users |
+| **Network Printer** | Network Printer | A printer connected to the network - shared by multiple users |
 | **Local Printer** | Local Printer | A printer connected directly to a computer via USB |
 | **IPP** | Internet Printing Protocol | A protocol for network printing |
 | **SMB** | Server Message Block | The protocol used for Windows shared printers |
@@ -31,10 +31,10 @@
 
 ## Overview
 Printer issues fall into four main categories:
-- **Connectivity** — can't find or connect to the printer
-- **Driver** — Windows can't communicate properly with the printer
-- **Print Quality** — output looks wrong
-- **Hardware** — physical component failure
+- **Connectivity** - can't find or connect to the printer
+- **Driver** - Windows can't communicate properly with the printer
+- **Print Quality** - output looks wrong
+- **Hardware** - physical component failure
 
 Always start with the simplest fix and work toward hardware replacement.
 
@@ -47,7 +47,7 @@ Always start with the simplest fix and work toward hardware replacement.
 1. Check USB cable is connected at both ends
 2. Try a different USB port on the computer
 3. Try a different USB cable
-4. Power cycle the printer (off → wait 30s → on)
+4. Power cycle the printer (off -> wait 30s -> on)
 5. Check Device Manager for printer with errors
 6. Reinstall the driver
 ```
@@ -116,7 +116,7 @@ Remove-PrintJob -PrinterName "PrinterName" -ID 1
 # Remove all print jobs for a printer
 Get-PrintJob -PrinterName "PrinterName" | Remove-PrintJob
 
-# Nuclear option — stop spooler, clear all jobs, restart
+# Nuclear option - stop spooler, clear all jobs, restart
 Stop-Service Spooler -Force
 Get-ChildItem "C:\Windows\System32\spool\PRINTERS" | Remove-Item -Force
 Start-Service Spooler
@@ -145,12 +145,12 @@ Get-Printer
 Add-Printer -Name "HP LaserJet" -DriverName "HP LaserJet Universal PCL6" -PortName "192.168.1.50"
 ```
 
-### GUI — Reinstall Driver Step by Step
-1. Open **Devices and Printers** (or Settings → Printers & Scanners)
-2. Right-click the printer → **Remove device**
-3. Open **Device Manager** → **View** → **Show hidden devices**
-4. Expand **Printers** → right-click any remaining entries → **Uninstall device**
-5. Open **Print Management** (if available) → **Drivers** → remove the driver
+### GUI - Reinstall Driver Step by Step
+1. Open **Devices and Printers** (or Settings -> Printers & Scanners)
+2. Right-click the printer -> **Remove device**
+3. Open **Device Manager** -> **View** -> **Show hidden devices**
+4. Expand **Printers** -> right-click any remaining entries -> **Uninstall device**
+5. Open **Print Management** (if available) -> **Drivers** -> remove the driver
 6. Restart the Print Spooler
 7. Download the latest driver from the manufacturer's website
 8. Install the new driver
@@ -186,8 +186,8 @@ Add-Printer -Name "HP LaserJet" -DriverName "HP LaserJet Universal PCL6" -PortNa
 Most printers have a built-in self-test:
 - **HP:** Hold **Go** button during power on
 - **Epson:** Hold specific button combination (check model manual)
-- **Brother:** Navigate to **Reports** → **Print Settings**
-- **Canon:** Navigate to **Settings** → **Device Settings** → **Print Status Sheet**
+- **Brother:** Navigate to **Reports** -> **Print Settings**
+- **Canon:** Navigate to **Settings** -> **Device Settings** -> **Print Status Sheet**
 
 ---
 
@@ -197,8 +197,8 @@ Most printers have a built-in self-test:
 1. Turn off the printer
 2. Open all access panels (front, back, and top depending on model)
 3. Gently pull jammed paper in the direction of the paper path
-   - Never pull against the paper path direction — this can damage the rollers
-4. Check for torn pieces of paper — even a small piece will cause another jam
+   - Never pull against the paper path direction - this can damage the rollers
+4. Check for torn pieces of paper - even a small piece will cause another jam
 5. Close all panels
 6. Power on and run a test page
 
@@ -230,7 +230,7 @@ Add-Printer -ConnectionName "\\Server\PrinterShareName"
 Get-Printer -ComputerName "PrintServer"
 
 # Deploy printer via Group Policy
-# Computer Configuration → Preferences → Control Panel Settings → Printers → New → Shared Printer
+# Computer Configuration -> Preferences -> Control Panel Settings -> Printers -> New -> Shared Printer
 ```
 
 ### Printer Accessible to Some Users But Not Others
@@ -240,8 +240,8 @@ $printer = Get-Printer -Name "Office Printer" -Full
 $printer.PermissionSDDL
 
 # Grant a user print access via GUI
-# Devices and Printers → Right-click printer → Printer Properties → Security tab
-# Add user/group → Check Print
+# Devices and Printers -> Right-click printer -> Printer Properties -> Security tab
+# Add user/group -> Check Print
 ```
 
 ---
@@ -297,11 +297,11 @@ Start-Service Spooler
 ---
 
 ## Notes
-- The Print Spooler is the first thing to check for any printing issue — restart it before anything else
-- Always download drivers from the manufacturer's website — avoid generic drivers where possible
-- Network printers should have a static IP or DHCP reservation — a changing IP breaks all connections
-- Laser printer consumables (toner, drum, fuser) have page count limits — check the printer's status page
-- When replacing toner — remove the protective tape before installing
+- The Print Spooler is the first thing to check for any printing issue - restart it before anything else
+- Always download drivers from the manufacturer's website - avoid generic drivers where possible
+- Network printers should have a static IP or DHCP reservation - a changing IP breaks all connections
+- Laser printer consumables (toner, drum, fuser) have page count limits - check the printer's status page
+- When replacing toner - remove the protective tape before installing
 
 ---
 
