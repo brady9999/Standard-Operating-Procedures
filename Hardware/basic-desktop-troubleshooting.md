@@ -277,6 +277,7 @@ Get-Service | Where-Object {$_.DisplayName -like "*audio*"}
 ```
 
 **Physical checks:**
+- Check if any app is muted in volume mixer
 - Verify speakers/headphones are plugged into the correct port (green = audio out)
 - Check if speaker power is on (powered desktop speakers)
 - Try headphones to isolate speaker vs system audio
