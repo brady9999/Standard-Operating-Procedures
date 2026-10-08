@@ -8,21 +8,19 @@
 
 ## Terminology
 
-| Term | What It Means |
+| Device | What It Is |
 |------|---------------|
 | **UniFi** | Ubiquiti's Monitoring Platform |
 | **UDM SE** | Ubiquiti firewall used to create a site|
-| **U6+** | Wi-Fi 6 wireless access point, mid-range |
-| **U6 lite** | Lower-powered Wi-Fi 6 access point, compact form factor |
 | **USW-48-G2** | 48 Port Ubiquiti managed gigabit switch |
-| **USW Lite 16 PoE** | 16-port managed switch with PoE, small form factor |
+
 
 
 ---
 
 ## Overview
-- This Document is used to show up to factory reset each device and re-configure them with new owner/admin
-- This exists to help teach future IT technicians on setting up a Network using Ubiquiti devices
+- This document is used to show up to factory reset each device and re-configure them with new owner/admin
+- This exists to help with setting up a Network using Ubiquiti devices
 
 
 ---
