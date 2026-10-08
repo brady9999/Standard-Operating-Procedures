@@ -40,7 +40,7 @@ lsblk
 vgchange -ay
 lvscan
 ```
->The Proxmox root is almost always /dev/pve/root. It may vary depending on the distro
+>The Proxmox root is almost always /dev/pve/root. It may vary depending on the distro or OS
 
 4. Mount it and bind the system dirs (needed for passwd to work in chroot):
 
@@ -56,11 +56,11 @@ chroot /mnt/pve
 ```
 6. Now that you can change any account using the following commands below
 ```bash
-# --- Create ---
+# Create 
 useradd -m -s /bin/bash username                # -m makes a home dir, -s sets the login shell
 passwd username                                 # REQUIRED after useradd — account is locked until a password is set
 
-# --- Passwords ---
+# Passwords
 passwd root                                     # change the root account's password
 passwd username                                 # change a specific user's password
 passwd -d username                              # remove the password entirely (empty password — use with care)
@@ -68,14 +68,14 @@ passwd -u username                              # unlock a password-locked accou
 chage -l username                               # view password expiry/aging info
 chage -E -1 username                            # remove an account-expiration date (revives an "expired" account)
 
-# --- Modify ---
+# Modify 
 usermod -l newname oldname                      # change login name
 usermod -d /home/newname -m username            # move/change home directory
 usermod -s /bin/bash username                   # change shell
 usermod -L username                             # lock the account (disables login)
 usermod -U username                             # unlock it
 
-# --- Groups ---
+# Groups 
 usermod -aG sudo username                       # add to sudo group (grants admin rights)
 usermod -aG groupname username                  # add to any group
 gpasswd -d username groupname                   # remove user from a group
@@ -85,13 +85,13 @@ groups username                                 # list a user's groups
 # NOTE: always use -aG (append the group). 'usermod -G sudo username' REPLACES all
 # the user's groups with only sudo, kicking them out of every other group.
 
-# --- Inspect ---
+# Inspect 
 cat /etc/passwd                                 # every account (name:x:UID:GID:...:home:shell)
 cat /etc/shadow                                 # password hashes and expiry (root-only)
 cat /etc/group                                  # groups and their members
 id username                                     # a specific user's UID, GID, and groups
 
-# --- Delete ---
+# Delete
 userdel username                                # remove the user, leave their home dir
 userdel -r username                             # remove the user AND home dir + mail spool
 ```
