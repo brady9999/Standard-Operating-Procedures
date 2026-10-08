@@ -76,7 +76,7 @@ Creates a network using internet with a custom Name and Password
    - **Password** —  Create a strong password
    - **Network** — Unless you created another Network select Native Network (Usually ISP's Network)
 3. Click the Create button at the bottom of the drop down 
-> **Tip:** Remember to add your chosen name and password to MyGlue   
+> **Tip:** Remember to document your chosen name and password
 
 ### Images
 ![Network Creation Menu](/Images/Network-Create.png)
