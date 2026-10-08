@@ -43,7 +43,7 @@ The Dream Machine firewall is used to create a site on UniFi site manager
 3. Open your web browser and it should be up to a device page
 4. Answer the following pop up questions:
    - **Name** — [Site]-FW-01 for example BRADY-FW-01
-   - **Login** — Login to the Unifi account (Username and Password are stored in MyGlue)
+   - **Login** — Login to the Unifi account
    - **Backups** — Unless otherwise told click No Backup
 5. Click confirm and it should start to load
 
