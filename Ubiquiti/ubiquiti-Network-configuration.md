@@ -21,7 +21,7 @@
 ---
 
 ## Overview
-- This Document is used to show up to factory reset each device and re-configure them with NHCN as owner/admin
+- This Document is used to show up to factory reset each device and re-configure them with new owner/admin
 - This exists to help teach future IT technicians on setting up a Network using Ubiquiti devices
 
 
@@ -42,7 +42,7 @@ The Dream Machine firewall is used to create a site on UniFi site manager
 ### GUI
 3. Open your web browser and it should be up to a device page
 4. Answer the following pop up questions:
-   - **Name** — [Site]-FW-01 for example DUBLIN-FW-01
+   - **Name** — [Site]-FW-01 for example BRADY-FW-01
    - **Login** — Login to the Unifi account (Username and Password are stored in MyGlue)
    - **Backups** — Unless otherwise told click No Backup
 5. Click confirm and it should start to load
